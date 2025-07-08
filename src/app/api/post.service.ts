@@ -36,11 +36,7 @@ export class PostService {
   }
 
   fetchPostById(postId: number): Observable<IPost> {
-    return this.http.get<IPost>(`${this.apiUrl}/posts/${postId}`).pipe(
-      tap(post => {
-        this.selectedPostSubject.next(post);
-      })
-    );
+    return this.http.get<IPost>(`${this.apiUrl}/posts/${postId}`);
   }
 
   createPost(payload: IPost): Observable<IPost> {
@@ -52,11 +48,30 @@ export class PostService {
     )
   }
 
+  deletePostById(postId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/posts/${postId}`).pipe(tap(
+      () => {
+        this.listOfPost = this.listOfPost.filter(post => post.id !== postId);
+        this.listOfPostSubject.next(this.listOfPost);
+      }
+    ));
+  }
+
   clearSelectedPost(): void {
     this.selectedPostSubject.next(null);
   }
 
   setAPostAction(action: PostEnumAction) {
     this.postActionSubject.next(action);
+  }
+
+  setPostToView(post: IPost): void {
+    this.selectedPostSubject.next(post);
+  }
+
+  deletePost(post: IPost): void {
+    const newList = this.listOfPost.filter(p => p.id !== post.id);
+    this.listOfPost = newList;
+    this.listOfPostSubject.next(this.listOfPost);
   }
 }

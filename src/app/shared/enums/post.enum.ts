@@ -1,7 +1,6 @@
 export enum PostEnumAction {
   ListPost,
   CreatePost,
-  ShowPost,
-  DeletePost,
+  ViewPost,
   EditPost
 }
