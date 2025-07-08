@@ -11,6 +11,10 @@ export class PostCardComponent {
 
   constructor() { }
 
+  onViewClick(): void {
+
+  }
+
   onPostClick(): void {
     alert(`Post clicked: ${this.post.title}`);
   }

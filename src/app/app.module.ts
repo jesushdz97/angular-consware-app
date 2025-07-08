@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PostListComponent } from './features/post/post-list/post-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PostCardComponent } from './features/post/post-card/post-card.component';
+import { PostViewComponent } from './features/post/post-view/post-view.component';
+import { PostCreateComponent } from './features/post/post-create/post-create.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PostListComponent,
-    PostCardComponent
+    PostViewComponent,
+    PostCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -18,6 +18,9 @@ import { PostCardComponent } from './features/post/post-card/post-card.component
     HttpClientModule
   ],
   providers: [],
+  exports: [
+    PostCreateComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
