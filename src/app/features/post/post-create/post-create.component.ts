@@ -12,8 +12,8 @@ export class PostCreateComponent {
 
   postForm = this.fb.group({
     userId: ['', Validators.required],
-    title: ['', Validators.required],
-    body: ['', Validators.required]
+    title: ['', [Validators.required, Validators.minLength(3)]],
+    body: ['', [Validators.required, Validators.minLength(10)]]
   });
 
   constructor(private fb: FormBuilder, private postService: PostService) { }
@@ -22,6 +22,10 @@ export class PostCreateComponent {
     const payload = this.postForm.value as Partial<IPost>;
     this.postService.createPost(payload).subscribe();
   }
+
+  get title() { return this.postForm.get('title'); }
+  get userId() { return this.postForm.get('userId'); }
+  get body() { return this.postForm.get('body'); }
 
   get disabledSubmit(): boolean {
     return !this.postForm.valid;

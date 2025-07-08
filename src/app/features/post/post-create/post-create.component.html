@@ -8,30 +8,46 @@
     <div class="p-6 pt-6">
       <form class="space-y-6" [formGroup]="postForm" (ngSubmit)="onSubmit()">
         <div>
-          <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium"
-            for="title">Title*</label>
+          <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium" for="title">Title*</label>
           <input type="text"
-            class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm mt-1"
+            class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm mt-1"
             id="title" placeholder="Enter post title" formControlName="title">
+          
+          <div *ngIf="title?.invalid && (title?.dirty || title?.touched)" class="mt-1 text-sm text-red-600">
+            <small *ngIf="title?.errors?.['required']">Title is required.</small>
+            <small *ngIf="title?.errors?.['minlength']">Title must be at least 3 characters long.</small>
+          </div>
         </div>
+
         <div>
-          <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium"
-            for="userId">User ID*</label>
+          <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium" for="userId">User ID*</label>
           <input type="number"
-            class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm mt-1"
+            class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm mt-1"
             id="userId" placeholder="Enter user ID" min="1" formControlName="userId">
+
+          <div *ngIf="userId?.invalid && (userId?.dirty || userId?.touched)" class="mt-1 text-sm text-red-600">
+            <small *ngIf="userId?.errors?.['required']">User ID is required.</small>
+            <small *ngIf="userId?.errors?.['min']">User ID must be a positive number.</small>
+          </div>
         </div>
+
         <div>
-          <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium"
-            for="body">Body*</label>
+          <label class="peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-sm font-medium" for="body">Body*</label>
           <textarea
             class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 mt-1 min-h-32"
             id="body" placeholder="Enter post content" formControlName="body"></textarea>
+          
+          <div *ngIf="body?.invalid && (body?.dirty || body?.touched)" class="mt-1 text-sm text-red-600">
+            <small *ngIf="body?.errors?.['required']">Body content is required.</small>
+            <small *ngIf="body?.errors?.['minlength']">The body must be at least 10 characters long.</small>
+          </div>
         </div>
+
         <div class="flex space-x-4 pt-4">
           <button
             class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 text-primary-foreground h-10 px-4 py-2 bg-blue-600 hover:bg-blue-700"
-            type="submit" [disabled]="disabledSubmit">Create Post</button>
+            type="submit" [disabled]="postForm.invalid">Create Post</button>
+          
           <button
             class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
             type="button">Cancel</button>
@@ -40,5 +56,3 @@
     </div>
   </div>
 </div>
-
-{{ postForm.value | json }}
