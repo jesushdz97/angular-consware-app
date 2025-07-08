@@ -7,6 +7,7 @@ import {PostCardComponent} from "./post-card/post-card.component";
 import {PostCreateComponent} from "./post-create/post-create.component";
 import {PostBackButtonComponent} from "./post-back-button/post-back-button.component";
 import {PostViewComponent} from './post-view/post-view.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {PostViewComponent} from './post-view/post-view.component';
   ],
   imports: [
     CommonModule,
-    PostRoutingModule
+    PostRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class PostModule {

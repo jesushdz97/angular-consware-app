@@ -14,7 +14,7 @@
   <ng-container *ngSwitchCase="PostEnumAction.ListPost">
     <app-post-list></app-post-list>
   </ng-container>
-  <ng-container *ngSwitchCase="PostEnumAction.CreatePost">
+  <ng-container *ngSwitchCase="PostEnumAction.CreatePost || PostEnumAction.EditPost">
     <app-post-create></app-post-create>
   </ng-container>
   <ng-container *ngSwitchCase="PostEnumAction.ViewPost">

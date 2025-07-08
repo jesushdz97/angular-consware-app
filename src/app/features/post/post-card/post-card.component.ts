@@ -28,7 +28,7 @@ export class PostCardComponent {
   }
 
   onEditClick(): void {
-    alert(`Edit clicked for post: ${this.post.title}`);
+    alert(`[NO WORK] - Edit clicked for post: ${this.post.title}`);
   }
 
   onDeleteClick(): void {

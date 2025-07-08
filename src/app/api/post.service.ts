@@ -39,11 +39,12 @@ export class PostService {
     return this.http.get<IPost>(`${this.apiUrl}/posts/${postId}`);
   }
 
-  createPost(payload: IPost): Observable<IPost> {
+  createPost(payload: Partial<IPost>): Observable<IPost> {
     return this.http.post<IPost>(`${this.apiUrl}/posts`, payload).pipe(
       tap(post => {
         this.listOfPost.unshift(post);
         this.listOfPostSubject.next(this.listOfPost);
+        this.postActionSubject.next(PostEnumAction.ListPost);
       })
     )
   }
