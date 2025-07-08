@@ -13,6 +13,6 @@ export class PostService {
   constructor(private http: HttpClient) { }
 
   getPosts(): Observable<IPost[]> {
-    return this.http.get<IPost[]>(`${this.apiUrl}/posts`);
+    return this.http.get<IPost[]>(`${this.apiUrl}/posts?_limit=10`);
   }
 }
